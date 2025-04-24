@@ -28,7 +28,7 @@ jobs:
           echo "TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}"
           echo "TARGET_REPO_OWNER: ${{ secrets.TARGET_REPO_OWNER }}"
           echo "TARGET_REPO_NAME: ${{ secrets.TARGET_REPO_NAME }}"
-        if: false  # 确保此步骤不会在实际运行时执行
+        
 
       # 4. 测试 PAT 是否有效（通过 GitHub API）
       - name: Test PAT (API)
