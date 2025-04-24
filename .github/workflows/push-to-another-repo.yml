@@ -5,6 +5,15 @@ on:
     branches:
       - main
 
+permissions:
+  # 声明对当前仓库的读取权限（actions/checkout 需要）
+  contents: read
+  packages: write
+  # 如果需要访问 GitHub API（如 Test PAT 步骤），可以添加以下权限
+  # actions: read
+  # packages: read
+  # 如果目标仓库是另一个账户的，这里不需要声明（通过 secrets 和 URL 访问）
+
 jobs:
   push:
     runs-on: ubuntu-latest
@@ -19,7 +28,7 @@ jobs:
           git config --global user.name "zhoudq"
           git config --global user.email "zhoudq@cn.ibm.com"
 
-      # 2. 测试 PAT 是否有效
+      # 3. 测试 PAT 是否有效（通过 GitHub API）
       - name: Test PAT (API)
         run: |
           curl -s -o /dev/null -w "%{http_code}" \
@@ -27,7 +36,10 @@ jobs:
             https://api.github.com/repos/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}
           echo "HTTP Status Code: $?"
 
-      # 3. 添加目标仓库为远程仓库（使用 HTTPS + PAT）
-      - name: Add target repository as remote
+      # 4. 添加目标仓库为远程仓库并推送（直接通过 HTTPS + PAT）
+      - name: Push to target repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}  # 如果需要额外权限
         run: |
-          git push https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}.git main
+          git remote add target https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}.git
+          git push target main
