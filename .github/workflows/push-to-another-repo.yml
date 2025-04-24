@@ -6,13 +6,7 @@ on:
       - main
 
 permissions:
-  # 声明对当前仓库的读取权限（actions/checkout 需要）
-  contents: write
-  packages: write
-  # 如果需要访问 GitHub API（如 Test PAT 步骤），可以添加以下权限
-  # actions: read
-  # packages: read
-  # 如果目标仓库是另一个账户的，这里不需要声明（通过 secrets 和 URL 访问）
+  contents: read  # 允许 checkout 操作
 
 jobs:
   push:
@@ -21,8 +15,8 @@ jobs:
       # 1. 检出源代码
       - name: Checkout source code
         uses: actions/checkout@v4
-        
-      # 2. 配置 Git 用户信息（可选）
+           
+      # 2. 配置 Git 用户信息
       - name: Set Git user
         run: |
           git config --global user.name "zhoudq"
@@ -30,16 +24,23 @@ jobs:
 
       # 3. 测试 PAT 是否有效（通过 GitHub API）
       - name: Test PAT (API)
+        id: test_pat
         run: |
-          curl -s -o /dev/null -w "%{http_code}" \
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
             -H "Authorization: token ${{ secrets.TARGET_REPO_TOKEN }}" \
-            https://api.github.com/repos/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}
-          echo "HTTP Status Code: $?"
+            https://api.github.com/repos/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }})
+          if [ "$HTTP_CODE" -ne 200 ]; then
+            echo "API Test failed with HTTP code $HTTP_CODE"
+            exit 1
+          fi
+          echo "API Test succeeded with HTTP code $HTTP_CODE"
 
-      # 4. 添加目标仓库为远程仓库并推送（直接通过 HTTPS + PAT）
+      # 4. 调用调试脚本进行推送
       - name: Push to target repository
         env:
-          GITHUB_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}  # 如果需要额外权限
+          TARGET_REPO_TOKEN: ${{ secrets.TARGET_REPO_TOKEN }}
+          TARGET_REPO_OWNER: ${{ secrets.TARGET_REPO_OWNER }}
+          TARGET_REPO_NAME: ${{ secrets.TARGET_REPO_NAME }}
         run: |
-          git remote add target https://x-access-token:${GITHUB_TOKEN}@github.com/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}.git
-          git push target main
+          chmod +x ./push_to_target.sh
+          ./push_to_target.sh
