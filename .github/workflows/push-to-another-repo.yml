@@ -7,7 +7,7 @@ on:
 
 permissions:
   # 声明对当前仓库的读取权限（actions/checkout 需要）
-  contents: read
+  contents: write
   packages: write
   # 如果需要访问 GitHub API（如 Test PAT 步骤），可以添加以下权限
   # actions: read
