@@ -12,6 +12,12 @@ jobs:
       # 1. 检出源代码
       - name: Checkout source code
         uses: actions/checkout@v4
+        
+      # 2. 配置 Git 用户信息（可选）
+      - name: Set Git user
+        run: |
+          git config --global user.name "zhoudq"
+          git config --global user.email "zhoudq@cn.ibm.com"
 
       # 2. 测试 PAT 是否有效
       - name: Test PAT (API)
