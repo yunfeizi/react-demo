@@ -3,7 +3,7 @@ name: Push to Another Repository
 on:
   push:
     branches:
-      - main  # 触发分支
+      - main
 
 jobs:
   push:
@@ -13,17 +13,27 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
         
-    - name: Test PAT
-      run: |
-        curl -H "Authorization: token ${{ secrets.TARGET_REPO_TOKEN }}" \
-          https://api.github.com/repos/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}
-
-      # 3. 添加目标仓库为远程仓库（使用 PAT 认证）
+      # 2. 测试 PAT 是否有效
+      - name: Test PAT
+        run: |
+          curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: token ${{ secrets.TARGET_REPO_TOKEN }}" \
+            https://api.github.com/repos/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}
+          echo "HTTP Status Code: $?"
+        
+      # 3. 添加目标仓库为远程仓库
       - name: Add target repository as remote
         run: |
-          git remote add target https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/zhoudeqiang9527/react-demo.git
+          git remote add target https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}.git
 
       # 4. 推送代码到目标仓库
       - name: Push to target repository
         run: |
-          git push target main  # 推送 main 分支
+          set -x
+          git push target main || {
+            echo "Push failed. Debug info:";
+            git remote -v;
+            git status;
+            exit 1;
+          }
+          set +x
