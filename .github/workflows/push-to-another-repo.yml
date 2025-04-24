@@ -22,7 +22,7 @@ jobs:
       # 3. 添加目标仓库为远程仓库（使用 PAT 认证）
       - name: Add target repository as remote
         run: |
-          git remote add target https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}.git
+          git remote add target https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/zhoudeqiang9527/react-demo.git
 
       # 4. 推送代码到目标仓库
       - name: Push to target repository
