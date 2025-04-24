@@ -24,16 +24,4 @@ jobs:
       # 3. 添加目标仓库为远程仓库（使用 HTTPS + PAT）
       - name: Add target repository as remote
         run: |
-          git remote add target https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}.git
-
-      # 4. 推送代码到目标仓库（启用调试）
-      - name: Push to target repository (Debug)
-        env:
-          GIT_TRACE: 1
-          GIT_CURL_VERBOSE: 1
-        run: |
-          git push target main || {
-            echo "Push failed. Debug info:";
-            git remote -v;
-            exit 1;
-          }
+          git push https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}.git main
