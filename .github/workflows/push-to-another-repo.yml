@@ -13,11 +13,6 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
-      # 2. 配置 Git 用户信息（可选）
-      - name: Set Git user
-        run: |
-          git config --global user.name "Your Name"
-          git config --global user.email "your-email@example.com"
 
       # 3. 添加目标仓库为远程仓库（使用 PAT 认证）
       - name: Add target repository as remote
