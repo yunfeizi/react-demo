@@ -30,4 +30,4 @@ jobs:
       # 3. 添加目标仓库为远程仓库（使用 HTTPS + PAT）
       - name: Add target repository as remote
         run: |
-          git push https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}.git main
+          git push https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}.git main
