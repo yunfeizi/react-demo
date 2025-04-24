@@ -12,7 +12,11 @@ jobs:
       # 1. 检出源代码
       - name: Checkout source code
         uses: actions/checkout@v4
-
+        
+    - name: Test PAT
+      run: |
+        curl -H "Authorization: token ${{ secrets.TARGET_REPO_TOKEN }}" \
+          https://api.github.com/repos/${{ secrets.TARGET_REPO_OWNER }}/${{ secrets.TARGET_REPO_NAME }}
 
       # 3. 添加目标仓库为远程仓库（使用 PAT 认证）
       - name: Add target repository as remote
