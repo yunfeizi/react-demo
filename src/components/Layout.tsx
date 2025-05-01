@@ -14,6 +14,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children, onNavigate, currentPage }) => {
   const dispatch = useDispatch();
   const { theme } = useTheme();
+  console.log('theme-----------------', theme);
   const sidebarOpen = useSelector(selectSidebarOpen);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 

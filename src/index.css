@@ -20,10 +20,12 @@ body {
 }
 
 /* 深色模式和浅色模式的基础样式 */
-/* .light {
-  @apply bg-light-bg text-light-text;
+.light {
+  background-color: var(--light-bg);
+  color: var(--light-text);
 }
 
 .dark {
-  @apply bg-dark-bg text-dark-text;
-} */
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}

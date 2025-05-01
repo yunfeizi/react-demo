@@ -29,8 +29,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       return savedTheme;
     }
     
-    // 检查系统偏好
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    // 检查系统偏好，默认返回dark
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'dark';
   };
 
   const [theme, setTheme] = useState<Theme>(getInitialTheme);

@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectTheme } from '../store/slices/themeSlice';
+
 import { addNotification } from '../store/slices/uiSlice';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
-  const theme = useSelector(selectTheme);
+  const { theme, toggleTheme } = useTheme();
 
   const handleShowNotification = (type: 'info' | 'success' | 'warning' | 'error') => {
     dispatch(addNotification({
@@ -37,7 +38,7 @@ const Dashboard: React.FC = () => {
         <Card>
           <CardTitle>状态管理演示</CardTitle>
           <CardContent>
-            <p>当前主题模式: <ThemeIndicator>{theme}</ThemeIndicator></p>
+            <Button onClick={toggleTheme}>切换主题 (当前: {theme})</Button>
             <ButtonGroup>
               <Button onClick={() => handleShowNotification('info')}>显示信息通知</Button>
               <Button onClick={() => handleShowNotification('success')}>显示成功通知</Button>
