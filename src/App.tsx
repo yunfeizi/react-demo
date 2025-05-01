@@ -16,6 +16,7 @@ function App() {
 
   // 模拟页面路由
   const renderPage = () => {
+    console.log('renderPage------------', currentPage)
     switch (currentPage) {
       case 'virtual-list':
         return <VirtualListDemo />
