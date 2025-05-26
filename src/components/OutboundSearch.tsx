@@ -43,50 +43,29 @@ const OutboundSearch: React.FC = () => {
 
   return (
     <div className="flyme-container">
-      <header className="header" style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '12px 40px',
-        borderBottom: '1px solid #E5E8EB'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img src={logoSvg} alt="FlyMe Logo" style={{ width: '14px', height: '14px' }} />
+      <header className="header">
+        <div className="header-left">
+          <div className="logo-container">
+            <img className="logo" src={logoSvg} alt="FlyMe Logo" />
           </div>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <a style={{ color: '#121417', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', textDecoration: 'none' }}>Book</a>
-            <a style={{ color: '#121417', fontSize: '14px', fontWeight: 'normal', cursor: 'pointer', textDecoration: 'none' }}>Manage</a>
+          <div className="nav-links">
+            <a className="nav-link active">Book</a>
+            <a className="nav-link">Manage</a>
           </div>
         </div>
-        <button style={{
-          backgroundColor: '#FFFFFF',
-          color: '#121417',
-          border: '1px solid #E5E8EB',
-          borderRadius: '8px',
-          padding: '8px 16px',
-          fontSize: '14px',
-          fontWeight: '500',
-          cursor: 'pointer',
-          transition: 'all 0.2s ease'
-        }}>Log in</button>
+        <button className="login-button">Log in</button>
       </header>
 
-      <main style={{
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '40px',
-        flex: '1'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px', fontSize: '14px' }}>
-          <span style={{ color: '#637887' }}>Home</span>
-          <span style={{ color: '#637887', margin: '0 8px' }}>/</span>
-          <span style={{ color: '#637887' }}>Flights</span>
-          <span style={{ color: '#637887', margin: '0 8px' }}>/</span>
-          <span style={{ color: '#121417', fontWeight: '500' }}>London to New York</span>
+      <main className="main-content">
+        <div className="breadcrumb">
+          <span>Home</span>
+          <span>/</span>
+          <span>Flights</span>
+          <span>/</span>
+          <span className="current">London to New York</span>
         </div>
 
-        <h1 style={{ fontSize: '24px', fontWeight: '600', marginBottom: '32px', color: '#121417' }}>Select your outbound flight</h1>
+        <h1 className="page-title">Select your outbound flight</h1>
 
         <table className="flight-list">
           <thead>
@@ -104,14 +83,8 @@ const OutboundSearch: React.FC = () => {
             {flights.map((flight) => (
               <tr key={flight.id} className={selectedFlight === flight.id ? 'selected' : ''}>
                 <td>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ 
-                      width: '24px', 
-                      height: '24px', 
-                      backgroundColor: '#F0F2F5', 
-                      borderRadius: '50%', 
-                      marginRight: '8px' 
-                    }}></div>
+                  <div className="airline-info">
+                    <div className="airline-logo"></div>
                     <span>{flight.airline}</span>
                   </div>
                 </td>
@@ -136,7 +109,5 @@ const OutboundSearch: React.FC = () => {
     </div>
   );
 };
-
-// 使用CSS类名代替styled-components
 
 export default OutboundSearch;
