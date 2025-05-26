@@ -75,6 +75,30 @@ const Layout: React.FC<LayoutProps> = ({ children, onNavigate, currentPage }) =>
           >
             组件库
           </NavItem>
+          <NavItem
+            active={currentPage === 'flyme'}
+            onClick={() => onNavigate('flyme')}
+          >
+            FlyMe航班搜索
+          </NavItem>
+          <NavItem
+            active={currentPage === 'outbound'}
+            onClick={() => onNavigate('outbound')}
+          >
+            航班选择页面
+          </NavItem>
+          <NavItem
+            active={currentPage === 'review'}
+            onClick={() => onNavigate('review')}
+          >
+            行程确认页面
+          </NavItem>
+          <NavItem
+            active={currentPage === 'login'}
+            onClick={() => onNavigate('login')}
+          >
+            登录页面
+          </NavItem>
         </Sidebar>
 
         <Content>{children}</Content>

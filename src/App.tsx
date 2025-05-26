@@ -10,6 +10,10 @@ import './App.css'
 const VirtualListDemo = lazy(() => import('./pages/VirtualListDemo'))
 const ComponentLibrary = lazy(() => import('./pages/ComponentLibrary'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
+const FlyMePage = lazy(() => import('./pages/FlyMePage'))
+const OutboundPage = lazy(() => import('./pages/OutboundPage'))
+const ReviewPage = lazy(() => import('./pages/ReviewPage'))
+const LoginPage = lazy(() => import('./pages/LoginPage'))
 
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard')
@@ -22,6 +26,14 @@ function App() {
         return <VirtualListDemo />
       case 'component-library':
         return <ComponentLibrary />
+      case 'flyme':
+        return <FlyMePage />
+      case 'outbound':
+        return <OutboundPage />
+      case 'review':
+        return <ReviewPage />
+      case 'login':
+        return <LoginPage />
       case 'dashboard':
       default:
         return <Dashboard />

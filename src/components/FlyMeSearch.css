@@ -1,0 +1,296 @@
+/* FlyMeSearch 组件的全局样式 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap');
+
+.flyme-container {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #121417;
+  background-color: #FFFFFF;
+}
+
+/* 响应式样式 */
+@media (max-width: 768px) {
+  .flyme-container .search-form {
+    padding: 16px;
+  }
+  
+  .flyme-container .header {
+    padding: 12px 20px;
+  }
+  
+  /* 航班列表在移动设备上的样式 */
+  .flyme-container .flight-row {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+  }
+  
+  .flyme-container .flight-cell {
+    width: 100%;
+    padding: 4px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .flyme-container .flight-cell::before {
+    content: attr(data-label);
+    font-weight: 500;
+  }
+  
+  /* Review页面在移动设备上的样式 */
+  .flyme-container .review-container {
+    padding: 0 16px;
+  }
+  
+  .flyme-container .flight-card-body {
+    flex-direction: column;
+  }
+  
+  .flyme-container .flight-route {
+    margin-top: 16px;
+  }
+  
+  /* 登录页面在移动设备上的样式 */
+  .flyme-container .login-form {
+    padding: 0 16px;
+  }
+  
+  .flyme-container .welcome-title {
+    font-size: 24px;
+  }
+}
+
+/* 确保输入框在移动设备上有足够的点击区域 */
+@media (max-width: 480px) {
+  .flyme-container .input-field,
+  .flyme-container .select-field,
+  .flyme-container .login-input {
+    padding: 14px 16px;
+  }
+  
+  .flyme-container .search-button,
+  .flyme-container .login-button {
+    padding: 14px 24px;
+  }
+  
+  .flyme-container .main-content {
+    padding: 20px;
+  }
+}
+
+/* 航班列表样式 */
+.flight-list {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.flight-list th {
+  text-align: left;
+  padding: 16px;
+  font-weight: 500;
+  color: #121417;
+  background-color: #F9FAFB;
+  border-bottom: 1px solid #E5E8EB;
+}
+
+.flight-list td {
+  padding: 16px;
+  color: #637887;
+  border-bottom: 1px solid #E5E8EB;
+}
+
+.flight-list tr:last-child td {
+  border-bottom: none;
+}
+
+.flight-list tr.selected {
+  background-color: #F9FAFB;
+}
+
+.select-button {
+  background-color: #FFFFFF;
+  color: #637887;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.select-button:hover {
+  background-color: #F0F2F5;
+}
+
+.select-button.selected {
+  background-color: #F0F2F5;
+}
+
+/* Review页面样式 */
+.flight-card {
+  border: 1px solid #E5E8EB;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background-color: #FFFFFF;
+}
+
+.flight-card-header {
+  background-color: #F9FAFB;
+  padding: 16px 24px;
+  border-bottom: 1px solid #E5E8EB;
+}
+
+.flight-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.flight-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flight-route {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  padding: 0 12px;
+}
+
+.flight-route-line {
+  height: 2px;
+  background-color: #E5E8EB;
+  position: relative;
+  margin: 8px 0;
+}
+
+.flight-route-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #121417;
+  position: absolute;
+  top: -3px;
+}
+
+.price-summary {
+  border: 1px solid #E5E8EB;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 8px;
+  background-color: #FFFFFF;
+}
+
+.confirm-button {
+  background-color: #121417;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  margin-top: 24px;
+}
+
+.confirm-button:hover {
+  background-color: #2C3E50;
+}
+
+/* 登录页面样式 */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #121417;
+  margin-bottom: 24px;
+  text-align: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.login-input {
+  width: 100%;
+  height: 48px;
+  padding: 15px;
+  border: 1px solid #DEE0E3;
+  border-radius: 12px;
+  font-size: 16px;
+  color: #6B7882;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.login-input::placeholder {
+  color: #6B7882;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #B2D1E5;
+}
+
+.forgot-link {
+  font-size: 14px;
+  color: #6B7882;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 4px 0 12px 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+.login-button {
+  background-color: #B2D1E5;
+  color: #121417;
+  border: none;
+  border-radius: 20px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 12px 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.login-button:hover {
+  background-color: #9BBFD8;
+}
+
+.signup-text {
+  font-size: 14px;
+  color: #6B7882;
+  text-align: center;
+  margin-top: 16px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.signup-link {
+  color: #6B7882;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.signup-link:hover {
+  color: #121417;
+}
