@@ -14,6 +14,9 @@ const FlyMePage = lazy(() => import('./pages/FlyMePage'))
 const OutboundPage = lazy(() => import('./pages/OutboundPage'))
 const ReviewPage = lazy(() => import('./pages/ReviewPage'))
 const LoginPage = lazy(() => import('./pages/LoginPage'))
+const RegisterPage = lazy(() => import('./pages/RegisterPage'))
+const BookingListPage = lazy(() => import('./pages/BookingListPage'))
+const BookingDetailPage = lazy(() => import('./pages/BookingDetailPage'))
 
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard')
@@ -34,6 +37,12 @@ function App() {
         return <ReviewPage />
       case 'login':
         return <LoginPage />
+      case 'register':
+        return <RegisterPage />
+      case 'bookinglist':
+        return <BookingListPage />
+      case 'bookingdetail':
+        return <BookingDetailPage />
       case 'dashboard':
       default:
         return <Dashboard />

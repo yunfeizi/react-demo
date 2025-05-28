@@ -99,6 +99,24 @@ const Layout: React.FC<LayoutProps> = ({ children, onNavigate, currentPage }) =>
           >
             登录页面
           </NavItem>
+          <NavItem
+            active={currentPage === 'register'}
+            onClick={() => onNavigate('register')}
+          >
+            注册页面
+          </NavItem>
+          <NavItem
+            active={currentPage === 'bookinglist'}
+            onClick={() => onNavigate('bookinglist')}
+          >
+            我的预订
+          </NavItem>
+          <NavItem
+            active={currentPage === 'bookingdetail'}
+            onClick={() => onNavigate('bookingdetail')}
+          >
+            预订详情
+          </NavItem>
         </Sidebar>
 
         <Content>{children}</Content>
